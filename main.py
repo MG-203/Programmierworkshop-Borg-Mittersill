@@ -2,6 +2,7 @@ import pygame
 import random
 import math
 from pygame import mixer
+from handgesture.gesture_control_2 import start, close, get_controls
 
 # wir initialisieren (erstellen) das Spiel.
 pygame.init()
@@ -123,31 +124,46 @@ def resetGame():
 
     score = 0
 
-
+start()
 # Gameloop
 running = True
 while running:
+    # update()
+    move, shoot = get_controls()    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
     
         # uberprufe, ob beim Drucken der Tastatur die Linkspfeiltaste oder Rechtspfeiltaste gedruckt wird
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                changeX = -0.3
-            if event.key == pygame.K_RIGHT:
-                changeX = 0.3
-            if event.key == pygame.K_SPACE and bulletState is "ready":
-                bulletSound = mixer.Sound('shot.mp3')
-                bulletSound.play()
-                bulletX = playerX
-                fireBullet(bulletX, bulletY) 
+        #     if event.key == pygame.K_LEFT:
+        #         changeX = -0.3
+        #     if event.key == pygame.K_RIGHT:
+        #         changeX = 0.3
+        #     if event.key == pygame.K_SPACE and bulletState is "ready":
+        #         bulletSound = mixer.Sound('shot.mp3')
+        #         bulletSound.play()
+        #         bulletX = playerX
+        #         fireBullet(bulletX, bulletY) 
             if event.key == pygame.K_SPACE and gameOverState == True: 
                 resetGame()
 
-        if event.type == pygame.KEYUP: 
-            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                changeX = 0
+        # if event.type == pygame.KEYUP: 
+        #     if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+        #         changeX = 0
+    
+    if move == "LEFT":
+        changeX = -0.3
+    elif move == "RIGHT":
+        changeX = 0.3
+    else:
+        changeX = 0
+
+    if shoot and bulletState == "ready":
+        bulletSound = mixer.Sound('shot.mp3')
+        bulletSound.play()
+        bulletX = playerX
+        fireBullet(bulletX, bulletY)
 
     # RGB
     screen.fill((0, 0, 0))
@@ -212,3 +228,6 @@ while running:
     showScore(textX, textY)
     showHighScore(10,45)
     pygame.display.update()
+
+close()
+pygame.quit()
