@@ -344,8 +344,8 @@ Wir können jetzt schon mit unserem Spiel interagieren, unser Spiel hat jedoch n
 enemyImage = pygame.image.load('alien.png')
 enemyX = 370
 enemyY = 50
-changeXenemy = 0
-changeYenemy = 0
+changeEnemyX = 0
+changeEnemyY = 0
 \end{lstlisting}
 
 Das Bild für den Gegner \texttt{alien.png} wird mit \texttt{pygame.image.load()} geladen. Die Variablen \texttt{enemyX} und \texttt{enemyY} legen die Startposition des Gegners fest. Während der Spieler am unteren Rand beginnt, wird der Gegner weiter oben auf \texttt{enemyY = 50} positioniert.
@@ -381,8 +381,8 @@ import random
 enemyImage = pygame.image.load('alien.png')
 enemyX = random.randint(0, 736)
 enemyY = random.randint(50, 150)
-changeXenemy = 0
-changeYenemy = 0
+changeEnemyX = 0
+changeEnemyY = 0
 \end{lstlisting}
 
 Hierbei werden die Startkoordinaten des Gegners mit \texttt{random.randint()} bestimmt:
@@ -399,36 +399,36 @@ Bisher wurde der Gegner nur an einer zufälligen Position platziert, bewegte sic
 \begin{lstlisting}[style=pythonstyle, language=Python]
 ...
 
-changeXenemy = 0.3
-changeYenemy = 40
+changeEnemyX = 0.3
+changeEnemyY = 40
 
 ...
 
 # Bewegung des Gegners
-enemyX = enemyX + changeXenemy
+enemyX = enemyX + changeEnemyX
 if enemyX <= 0:
-    changeXenemy = 0.3
-    enemyY += changeYenemy
+    changeEnemyX = 0.3
+    enemyY += changeEnemyY
 elif enemyX > 736:
-    changeXenemy = -0.3
-    enemyY += changeYenemy
+    changeEnemyX = -0.3
+    enemyY += changeEnemyY
 \end{lstlisting}
 
 Erklärung der Logik:
-- Die Variable \texttt{changeXenemy} steuert die horizontale Bewegung des Gegners. Mit einem Wert von \texttt{0.3} bewegt sich der Gegner nach rechts, mit \texttt{-0.3} nach links.
-- Die Variable \texttt{changeYenemy} legt fest, um wie viele Pixel der Gegner nach unten rückt, sobald er den Rand erreicht.
+- Die Variable \texttt{changeEnemyX} steuert die horizontale Bewegung des Gegners. Mit einem Wert von \texttt{0.3} bewegt sich der Gegner nach rechts, mit \texttt{-0.3} nach links.
+- Die Variable \texttt{changeEnemyY} legt fest, um wie viele Pixel der Gegner nach unten rückt, sobald er den Rand erreicht.
 
 Die Bewegung folgt diesem Ablauf:\\
 1. \textbf{Horizontale Bewegung}:  
-   Der Wert von \texttt{enemyX} wird kontinuierlich um \texttt{changeXenemy} erhöht oder verringert, wodurch sich der Gegner nach rechts oder links bewegt.
+   Der Wert von \texttt{enemyX} wird kontinuierlich um \texttt{changeEnemyX} erhöht oder verringert, wodurch sich der Gegner nach rechts oder links bewegt.
    
 2. \textbf{Bildschirmrand-Erkennung}: 
    Falls \texttt{enemyX} kleiner oder gleich \texttt{0} ist, bedeutet dies, dass der Gegner den linken Rand erreicht hat.  
-     - Nun wird \texttt{changeXenemy} auf \texttt{0.3} gesetzt, damit sich der Gegner wieder nach rechts bewegt.  
-     - Außerdem wird \texttt{enemyY} um \texttt{changeYenemy} erhöht, sodass der Gegner eine Reihe nach unten rückt.
+     - Nun wird \texttt{changeEnemyX} auf \texttt{0.3} gesetzt, damit sich der Gegner wieder nach rechts bewegt.  
+     - Außerdem wird \texttt{enemyY} um \texttt{changeEnemyY} erhöht, sodass der Gegner eine Reihe nach unten rückt.
    - Falls \texttt{enemyX} größer als \texttt{736} ist (die rechte Grenze, basierend auf einer Fensterbreite von 800 Pixeln und einer ungefähren Gegnerbreite von 64 Pixeln), passiert das Gleiche in umgekehrter Richtung:  
-     - \texttt{changeXenemy} wird auf \texttt{-0.3} gesetzt, damit sich der Gegner wieder nach links bewegt.  
-     - Der Gegner rückt erneut um \texttt{changeYenemy} nach unten.
+     - \texttt{changeEnemyX} wird auf \texttt{-0.3} gesetzt, damit sich der Gegner wieder nach links bewegt.  
+     - Der Gegner rückt erneut um \texttt{changeEnemyY} nach unten.
 
 Durch diese Logik entsteht das typische Bewegungsmuster von Gegnerformationen, die in klassischen Spielen wie \texttt{Space Invaders} verwendet werden.
 
@@ -484,8 +484,8 @@ changeX = 0
 enemyImage = pygame.image.load('alien.png')
 enemyX = random.randint(0,736)
 enemyY = random.randint(50,150)
-changeXenemy = 0.3
-changeYenemy = 40
+changeEnemyX = 0.3
+changeEnemyY = 40
 
 def player(x, y): 
     screen.blit(playerImage, (x, y))
@@ -528,13 +528,13 @@ while running:
     
     
     # Bewegung des Gegners
-    enemyX = enemyX + changeXenemy
+    enemyX = enemyX + changeEnemyX
     if enemyX <= 0:
-        changeXenemy = 0.3
-        enemyY += changeYenemy
+        changeEnemyX = 0.3
+        enemyY += changeEnemyY
     elif enemyX > 736:
-        changeXenemy = -0.3
-        enemyY += changeYenemy
+        changeEnemyX = -0.3
+        enemyY += changeEnemyY
         
     player(playerX, playerY)
     enemy(enemyX, enemyY)
@@ -791,8 +791,8 @@ changeX = 0
 enemyImage = pygame.image.load('alien.png')
 enemyX = random.randint(0,736)
 enemyY = random.randint(50,150)
-changeXenemy = 0.3
-changeYenemy = 40
+changeEnemyX = 0.3
+changeEnemyY = 40
 
 # Bullet
 bulletImage = pygame.image.load('bullet.png')
@@ -862,13 +862,13 @@ while running:
         playerX = 736
 
     # Bewegung des Gegners
-    enemyX = enemyX + changeXenemy
+    enemyX = enemyX + changeEnemyX
     if enemyX <= 0:
-        changeXenemy = 0.3
-        enemyY += changeYenemy
+        changeEnemyX = 0.3
+        enemyY += changeEnemyY
     elif enemyX > 736:
-        changeXenemy = -0.3
-        enemyY += changeYenemy
+        changeEnemyX = -0.3
+        enemyY += changeEnemyY
 
     # Bewegung der Kugel
     if bulletY < -20: 
@@ -905,15 +905,15 @@ Bisher gab es nur einen einzelnen Gegner, der nach jeder Kollision an einer neue
 # Enemy
 enemyX = []
 enemyY = []
-changeXenemy = []
-changeYenemy = []
+changeEnemyX = []
+changeEnemyY = []
 NumberOfEnemies = 6
 
 for i in range(NumberOfEnemies):
     enemyX.append(random.randint(0,736))
     enemyY.append(random.randint(50,150))
-    changeXenemy.append(0.3)
-    changeYenemy.append(40)
+    changeEnemyX.append(0.3)
+    changeEnemyY.append(40)
 
 enemyImage = pygame.image.load('alien.png')
 \end{lstlisting}
@@ -922,7 +922,7 @@ Erklärung:\\
 - \texttt{NumberOfEnemies = 6}: Gibt an, wie viele Gegner gleichzeitig auf dem Spielfeld sein sollen.\\
 - Anstatt einzelne Variablen für \texttt{enemyX} und \texttt{enemyY} zu nutzen, werden nun Listen erstellt, um die Positionen mehrerer Gegner zu speichern.\\
 - Mit einer \texttt{for}-Schleife werden die Startwerte für alle Gegner zufällig gesetzt und in den Listen gespeichert.\\
-- Die Bewegungsgeschwindigkeit jedes Gegners wird ebenfalls in Listen gespeichert (\texttt{changeXenemy} und \texttt{changeYenemy}), sodass sich jeder Gegner unabhängig bewegen kann.\\
+- Die Bewegungsgeschwindigkeit jedes Gegners wird ebenfalls in Listen gespeichert (\texttt{changeEnemyX} und \texttt{changeEnemyY}), sodass sich jeder Gegner unabhängig bewegen kann.\\
 
 \subsection{Bewegung und Kollision für mehrere Gegner}
 Damit sich alle Gegner unabhängig bewegen und auf Kollisionen mit der Kugel reagieren können, wird die Bewegungslogik in einer Schleife angepasst:
@@ -931,13 +931,13 @@ Damit sich alle Gegner unabhängig bewegen und auf Kollisionen mit der Kugel rea
 ...
 # Bewegung des Gegners
 for i in range(NumberOfEnemies):
-    enemyX[i] = enemyX[i] + changeXenemy[i]
+    enemyX[i] = enemyX[i] + changeEnemyX[i]
     if enemyX[i] <= 0:
-        changeXenemy[i] = 0.3
-        enemyY[i] += changeYenemy[i]
+        changeEnemyX[i] = 0.3
+        enemyY[i] += changeEnemyY[i]
     elif enemyX[i] > 736:
-        changeXenemy[i] = -0.3
-        enemyY[i] += changeYenemy[i]
+        changeEnemyX[i] = -0.3
+        enemyY[i] += changeEnemyY[i]
 
     # Kollision
     collision = isCollision(enemyX[i], enemyY[i], bulletX, bulletY)
@@ -953,7 +953,7 @@ for i in range(NumberOfEnemies):
 
 Erklärung:\\
 - Die Bewegung aller Gegner erfolgt nun innerhalb einer Schleife:  \\
-  - Jeder Gegner bewegt sich nach rechts oder links basierend auf seinem eigenen \texttt{changeXenemy[i]}-Wert.\\
+  - Jeder Gegner bewegt sich nach rechts oder links basierend auf seinem eigenen \texttt{changeEnemyX[i]}-Wert.\\
   - Falls ein Gegner den linken oder rechten Rand erreicht, ändert sich seine Richtung und er rückt nach unten.\\
 - Die Kollisionserkennung läuft ebenfalls innerhalb der Schleife:\\
   - Falls eine Kollision erkannt wird, wird die Kugel zurückgesetzt und der Punktestand erhöht.\\
@@ -1117,6 +1117,7 @@ for i in range(NumberOfEnemies):
     if enemyY[i] > 420: 
         for j in range(NumberOfEnemies):
             enemyY[j] = 2000
+        gameOverState = True
         gameOverText()
         break
 \end{lstlisting}
@@ -1163,15 +1164,15 @@ changeX = 0
 # Enemy
 enemyX = []
 enemyY = []
-changeXenemy = []
-changeYenemy = []
+changeEnemyX = []
+changeEnemyY = []
 NumberOfEnemies = 6
 
 for i in range(NumberOfEnemies):
     enemyX.append(random.randint(0,736))
     enemyY.append(random.randint(50,150))
-    changeXenemy.append(0.3)
-    changeYenemy.append(40)
+    changeEnemyX.append(0.3)
+    changeEnemyY.append(40)
 
 enemyImage = pygame.image.load('alien.png')
 
@@ -1265,16 +1266,17 @@ while running:
         if enemyY[i] > 420: 
             for j in range(NumberOfEnemies):
                 enemyY[j] = 2000
+            gameOverstate = True
             gameOverText()
             break
 
-        enemyX[i] = enemyX[i] + changeXenemy[i]
+        enemyX[i] = enemyX[i] + changeEnemyX[i]
         if enemyX[i] <= 0:
-            changeXenemy[i] = 0.3
-            enemyY[i] += changeYenemy[i]
+            changeEnemyX[i] = 0.3
+            enemyY[i] += changeEnemyY[i]
         elif enemyX[i] > 736:
-            changeXenemy[i] = -0.3
-            enemyY[i] += changeYenemy[i]
+            changeEnemyX[i] = -0.3
+            enemyY[i] += changeEnemyY[i]
         
         # Kollision
         collision = isCollision(enemyX[i], enemyY[i], bulletX, bulletY)
@@ -1330,7 +1332,7 @@ Damit das Spiel von vorne beginnt, setzen wir alle Variablen auf ihre Anfangswer
 \begin{lstlisting}[style=pythonstyle, language=Python]
 #Reset Game
 def resetGame():
-    global playerX, playerY, changeX, enemyX, enemyY, changeXenemy, changeYenemy
+    global playerX, playerY, changeX, enemyX, enemyY, changeEnemyX, changeEnemyY
     global NumberOfEnemies, bulletX, bulletY, changeXbullet, changeYbullet
     global bulletState, gameOverState, score
 
@@ -1342,15 +1344,15 @@ def resetGame():
     # Replace enemies
     enemyX = []
     enemyY = []
-    changeXenemy = []
-    changeYenemy = []
+    changeEnemyX = []
+    changeEnemyY = []
     NumberOfEnemies = 8 
 
     for i in range(NumberOfEnemies):
         enemyX.append(random.randint(0,736))
         enemyY.append(random.randint(50,150))
-        changeXenemy.append(0.3)
-        changeYenemy.append(40)
+        changeEnemyX.append(0.3)
+        changeEnemyY.append(40)
 
     # Reset gamneOverState
     gameOverState = False
@@ -1443,6 +1445,8 @@ showHighScore(10, 45)
 \item \textbf{showHighScore(10, 45):} es wird die showHighScore-Funktion aufgerufen und der Highscore wird auf die Koordinaten (10, 45) gesetzt
 \end{itemize}
 
+
+Den fertigen Codex sowie den code für die einzelnen Kapitel findet man unter \href{https://github.com/MG-203/Programmierworkshop-Borg-Mittersill}{Programmierworkshop BORG Mittersill} 
 
 
 

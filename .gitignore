@@ -1,4 +1,19 @@
-./aux
-./log
-./out
-./synctex.gz
+# LaTeX build files
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# Optional: PDF nur ignorieren, wenn du PDFs nicht mitversionieren willst
+# *.pdf
+
+build/

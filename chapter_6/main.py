@@ -180,6 +180,7 @@ while running:
         if enemyY[i] > 420: 
             for j in range(NumberOfEnemies): 
                 enemyY[j] = 2000
+            gameOverState = True
             gameOverText()
             break
 
